@@ -1,0 +1,25 @@
+{
+  "name": "nodeifier",
+  "version": "1.0.0",
+  "description": "Check for GPUs in stock",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wikedawsom/nodeifier.git"
+  },
+  "author": "wike",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wikedawsom/nodeifier/issues"
+  },
+  "homepage": "https://github.com/wikedawsom/nodeifier#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.1",
+    "express": "^4.17.1"
+  }
+}
