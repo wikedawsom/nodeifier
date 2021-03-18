@@ -2,10 +2,10 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const axios = require('axios');
 
-const { PING_USER_ID, WEBHOOK_ID, WEBHOOK_TOKEN } = process.env;
+const { PING_GROUP_ID, WEBHOOK_ID, WEBHOOK_TOKEN } = process.env;
 const hook = new Discord.WebhookClient(WEBHOOK_ID,WEBHOOK_TOKEN);
-
-hook.send(`Beware ${PING_USER_ID}! I live`);
+const PING_TAG = `<@&${PING_GROUP_ID}>`;
+hook.send(`Beware ${PING_TAG}! I live`);
 let iterator = 0;
 const listenLoop = () => {
 	if(iterator % 500 === 0 && iterator !== 0 || iterator === 5){
@@ -23,7 +23,7 @@ const listenLoop = () => {
 				//hook.send(`RTX 3090 out of stock`);
 				console.log(`Request #${iterator}. No end in sight`)
 			} else {
-				hook.send(`${WIKE_TAG} https://www.bestbuy.com/site/nvidia-geforce-rtx-3090-24gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429434.p?skuId=6429434 GO BUY NOW!!`);
+				hook.send(`${PING_TAG} https://www.bestbuy.com/site/nvidia-geforce-rtx-3090-24gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429434.p?skuId=6429434 GO BUY NOW!!`);
 			}
 			
 
