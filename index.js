@@ -1,10 +1,22 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const axios = require('axios');
+const winston = require('winston');
 
 const { PING_GROUP_ID, WEBHOOK_ID, WEBHOOK_TOKEN } = process.env;
 const hook = new Discord.WebhookClient(WEBHOOK_ID,WEBHOOK_TOKEN);
 const PING_TAG = `<@&${PING_GROUP_ID}>`;
+
+const logger = winston.createLogger({
+	level: 'error',
+	format: winston.format.json(),
+	transports: [
+		// - Write all logs with level `error` and below to `error.log`
+		new winston.transports.File({ filename: 'error.log', level: 'error' }),
+	],
+});
+logger.error("Script started, log initialized :) " + new Date().toDateString());
+
 hook.send(`Beware ${PING_TAG}! I live`);
 let iterator = 0;
 const listenLoop = () => {
@@ -28,7 +40,8 @@ const listenLoop = () => {
 			
 
 		})
-		.catch((err) => {console.log(err)});
+		.catch((err) => {logger.error(err); console.error(err);});
+		// This is the test case I used to make sure this method of detecting stock actually works
 	/*axios.get('https://www.bestbuy.com/site/core-i9-10850k-desktop-processor-10-cores-up-to-5-2-ghz-unlocked-lga1200-intel-400-series-chipset-125w/6428160.p?skuId=6428160')
 		.then((response) => {
 			if(response.data.includes('<button class="btn btn-disabled btn-lg btn-block add-to-cart-button"')) {
