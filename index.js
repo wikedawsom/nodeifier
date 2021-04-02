@@ -40,19 +40,20 @@ if(PING_GROUP_ID === ""){
 }
 const PING_TAG = `<@&${PING_GROUP_ID}>`;
 
-
-logger.error("Script started, log initialized :) " + new Date().toDateString());
+const startTimestamp = new Date();
+logger.error("Script started, log initialized :) " + startTimestamp.toDateString());
 
 hook.send(`Beware ${PING_TAG}! I live`);
 let iterator = 0;
 const listenLoop = () => {
-	if(iterator % 500 === 0 && iterator !== 0 || iterator === 5){
-		let seconds = iterator * 5;
+	if(iterator % 1000 === 0 && iterator !== 0 || iterator === 5){
+		const currentTimestamp = new Date();
+		let seconds = parseInt((currentTimestamp - startTimestamp)/1000);
 		let minutes = Math.floor(seconds/60);
 		let hours = Math.floor(minutes/60);
 		seconds = seconds - minutes * 60;
 		minutes = minutes - hours * 60;
-		hook.send(`Uptime: ${hours}:${minutes}:${seconds}. Currently no end in sight`);
+		hook.send(`Uptime: ${hours < 10 ? "0" : ""}${hours}:${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}. Currently no end in sight`);
 	}
 	axios.get('https://www.bestbuy.com/site/nvidia-geforce-rtx-3090-24gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429434.p?skuId=6429434')
 		.then((response) => {
